@@ -1,7 +1,6 @@
 import pytest
-from base import BaseCase
+from base import BaseCase, get_random_info
 from ui import locators
-from selenium.webdriver.common.keys import Keys
 
 
 class Test(BaseCase):
@@ -18,19 +17,21 @@ class Test(BaseCase):
 
     @pytest.mark.UI
     def test_change_profile_contacts(self):
-        name = 'Aleksey Fomin'
-        phone = '88005553535'
+        name = get_random_info(100)
+        phone = get_random_info(20)
 
         self.login()
 
         self.click(locators.PROFILE_CONTACTS_LOCATOR)
+
         full_name = self.find(locators.FULL_NAME_LOCATOR)
-        full_name.send_keys(Keys.CONTROL + 'a', Keys.BACKSPACE)  # очищение поля для ввода новых данных
+        full_name.clear()
         full_name.send_keys(name)
 
         phone_number = self.find(locators.PHONE_NUMBER_LOCATOR)
-        phone_number.send_keys(Keys.CONTROL + 'a', Keys.BACKSPACE)  # очищение поля для ввода новых данных
+        phone_number.clear()
         phone_number.send_keys(phone)
+
         self.click(locators.SAVE_CONTACTS_BUTTON_LOCATOR)
         assert full_name.get_attribute('value') == name and phone_number.get_attribute('value') == phone
 

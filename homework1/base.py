@@ -1,8 +1,11 @@
 import pytest
 from ui import locators
+import credentials
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import StaleElementReferenceException, ElementClickInterceptedException, TimeoutException
+import random
+import string
 
 
 class BaseCase:
@@ -26,13 +29,17 @@ class BaseCase:
         self.wait(timeout).until(EC.element_to_be_clickable(locator)).click()
 
     def login(self):
-        email = 'fominal11@mail.ru'
-        password = 'Qwerty123'
+        email = credentials.email
+        password = credentials.password
 
         self.click(locators.LOGIN_LOCATOR)
+
         elem_email = self.find(locators.EMAIL_LOCATOR)
+        elem_email.clear()
         elem_email.send_keys(email)
+
         elem_password = self.find(locators.PASSWORD_LOCATOR)
+        elem_password.clear()
         elem_password.send_keys(password)
 
         self.click(locators.AUTH_BUTTON_LOCATOR)
@@ -47,3 +54,7 @@ class BaseCase:
     def url_matches(self, url, timeout=None):
         return self.wait(timeout).until(EC.url_matches(url))
 
+
+def get_random_info(max_length):
+    return ''.join(random.choice(string.ascii_letters + string.digits + ' ') for _ in range(random.randint(1,
+                                                                                                           max_length)))
