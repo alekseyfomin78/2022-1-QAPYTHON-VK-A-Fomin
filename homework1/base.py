@@ -55,6 +55,5 @@ class BaseCase:
         return self.wait(timeout).until(EC.url_matches(url))
 
 
-def get_random_info(max_length):
-    return ''.join(random.choice(string.ascii_letters + string.digits + ' ') for _ in range(random.randint(1,
-                                                                                                           max_length)))
+def get_random_info(symbols, max_length):
+    return ''.join(random.choice(symbols) for _ in range(random.randint(1, max_length)))
