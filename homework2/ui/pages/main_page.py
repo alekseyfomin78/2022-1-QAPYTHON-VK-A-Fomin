@@ -1,5 +1,4 @@
 from selenium.common.exceptions import StaleElementReferenceException
-# from ui.pages.segments_page import SegmentsPage
 from ui.locators import basic_locators
 from ui.pages.base_page import BasePage
 

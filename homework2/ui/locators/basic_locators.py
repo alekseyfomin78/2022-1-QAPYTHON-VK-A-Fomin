@@ -3,12 +3,6 @@ from selenium.webdriver.common.by import By
 
 class BasePageLocators:
     pass
-    '''LOGOUT_LOCATOR = (By.XPATH, '//div[contains(@class, "right-module-rightButton")]')
-    LOGOUT_BUTTON_LOCATOR = (By.XPATH, '//a[@href="/logout"]')
-
-    BILLING_LOCATOR = (By.XPATH, '//a[@href="/billing"]')
-    STATISTICS_LOCATOR = (By.XPATH, '//a[@href="/statistics"]')
-    SEGMENTS_LOCATOR = (By.XPATH, '//a[@href="/segments"]')'''
 
 
 class LoginPageLocators(BasePageLocators):
@@ -16,7 +10,7 @@ class LoginPageLocators(BasePageLocators):
     EMAIL_LOCATOR = (By.NAME, 'email')
     PASSWORD_LOCATOR = (By.NAME, 'password')
     AUTH_BUTTON_LOCATOR = (By.XPATH, '//div[contains(@class, "authForm-module-button")]')
-    ERROR_LOGIN_MESSAGE = (By.CLASS_NAME, 'formMsg_title')
+    ERROR_LOGIN_MESSAGE = (By.XPATH, '//div[contains(@class, "notify-module-content")]')
 
 
 class MainPageLocators(BasePageLocators):
@@ -40,12 +34,8 @@ class DashboardPageLocators(MainPageLocators):
     LOAD_CONTENT_PAGE_LOCATOR = (By.XPATH, '//div[@class="page__layout__content js-target-content"]')
     TRAFFIC_LOCATOR = (By.XPATH, '//div[contains(@class, "column-list-item _traffic")]')
     FIELD_FOR_URL_LOCATOR = (By.XPATH, '//input[contains(@class, "mainUrl-module-searchInput")]')
-
     LOAD_CONTENT_CAMPAIGN_NAME_LOCATOR = (By.XPATH, '//div[@class="base-settings__campaign-name-wrap '
                                                     'js-base-setting-campaign-name-wrap"]')
-
-    # LOAD_CONTENT_2 = (By.XPATH, '//div["class="input__clear js-input-clear"]')
-
     FIELD_FOR_CAMPAIGN_NAME_LOCATOR = (By.XPATH, '//input[contains(@class, "input__inp js-form-element")]')
     TEASER_LOCATOR = (By.XPATH, '//div[contains(@id, "patterns_teaser")]')
     LOAD_CONTENT_TEASER_LOCATOR = (By.XPATH, '//div[@class="js-settings-after-wrap campaign__after-wrap"]')
@@ -65,6 +55,5 @@ class SegmentsPageLocators(MainPageLocators):
     CREATE_NEW_SEGMENT_BUTTON_LOCATORS = (By.XPATH, '//button[@class="button button_submit"]')
     APP_AND_GAME_LOCATOR = (By.XPATH, '//div[@class="adding-segments-item"]')
     DELETE_SEGMENT_BUTTON_LOCATOR = (By.XPATH, '//button[@class="button button_confirm-remove button_general"]')
-    # LOAD_PAGE_LOCATOR = (By.XPATH, '//body[contains(@class, "customScrollDisableOverscroll")]')
 
 

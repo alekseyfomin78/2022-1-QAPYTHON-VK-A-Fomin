@@ -1,7 +1,6 @@
 import time
 
 import allure
-from selenium.common.exceptions import StaleElementReferenceException
 from selenium.webdriver import ActionChains
 
 from ui.locators import basic_locators
@@ -34,10 +33,11 @@ class BasePage(object):
             timeout = 15
         return WebDriverWait(self.driver, timeout=timeout)
 
+    @allure.step('Find element')
     def find(self, locator, timeout=None):
         return self.wait(timeout).until(EC.presence_of_element_located(locator))
 
-    @allure.step('Click')
+    @allure.step('Click element')
     def click(self, locator, timeout=None):
         self.wait(timeout).until(EC.element_to_be_clickable(locator)).click()
 

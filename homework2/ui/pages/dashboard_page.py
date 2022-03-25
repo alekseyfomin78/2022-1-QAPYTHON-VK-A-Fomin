@@ -1,5 +1,3 @@
-import time
-
 from ui.locators import basic_locators
 from ui.pages.main_page import MainPage
 
@@ -48,5 +46,5 @@ class DashboardPage(MainPage):
         elem_ad_text.clear()
         elem_ad_text.send_keys(campaign_name)
 
-        self.click(self.locators.SAVE_CAMPAIGN_BUTTON_LOCATOR)
+        self.click(self.locators.SAVE_CAMPAIGN_BUTTON_LOCATOR, timeout=30)
 
