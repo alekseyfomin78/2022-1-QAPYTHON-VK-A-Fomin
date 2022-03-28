@@ -68,7 +68,7 @@ class Test(BaseCase):
         self.logger.info(f'New advertisement campaign "{campaign_name}" is created')
 
         CHECK_TITLE_CAMPAIGN_LOCATOR = (By.XPATH, f'//a[@title="{campaign_name}"]')
-        elem_title = self.dashboard_page.find(CHECK_TITLE_CAMPAIGN_LOCATOR, timeout=60)
+        elem_title = self.dashboard_page.find(CHECK_TITLE_CAMPAIGN_LOCATOR, timeout=30)
 
         self.logger.info(f'Checking that the advertisement campaign "{campaign_name}" has been created')
 

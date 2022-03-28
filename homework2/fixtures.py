@@ -31,9 +31,23 @@ def pytest_configure(config):
 def driver(config, temp_dir):
     browser = config['browser']
     url = config['url']
+    selenoid = config['selenoid']
+    vnc = config['vnc']
     options = Options()
     options.add_experimental_option("prefs", {"download.default_directory": temp_dir})
-    if browser == 'chrome':
+    if selenoid:
+        capabilities = {
+            'browserName': 'chrome',
+            'version': '99.0',
+        }
+        if vnc:
+            capabilities['enableVNC'] = True
+        driver = webdriver.Remote(
+            'http://127.0.0.1:4444/wd/hub',
+            options=options,
+            desired_capabilities=capabilities
+        )
+    elif browser == 'chrome':
         driver = webdriver.Chrome(executable_path=ChromeDriverManager().install(), options=options)
     elif browser == 'firefox':
         driver = webdriver.Firefox(executable_path=GeckoDriverManager().install())
