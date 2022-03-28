@@ -6,17 +6,14 @@ from ui import locators
 
 
 class Test(BaseCase):
-    main_page_url = 'https://target.my.com/dashboard'
 
     @pytest.mark.UI
     def test_login(self):
         self.login()
-        assert self.driver.current_url == self.main_page_url, 'Invalid login or password'
 
     @pytest.mark.UI
     def test_logout(self):
         self.login()
-        assert self.driver.current_url == self.main_page_url, 'Invalid login or password'
         self.logout()
         assert self.driver.current_url == 'https://target.my.com/'
 
@@ -29,8 +26,6 @@ class Test(BaseCase):
         phone = get_random_info(symbols_for_phone, 20)
 
         self.login()
-
-        assert self.driver.current_url == self.main_page_url, 'Invalid login or password'
 
         self.click(locators.PROFILE_CONTACTS_LOCATOR)
 
@@ -55,9 +50,6 @@ class Test(BaseCase):
     )
     def test_change_page(self, locator, url):
         self.login()
-
-        assert self.driver.current_url == self.main_page_url, 'Invalid login or password'
-
         self.find(locator)
         self.click(locator)
         assert self.url_matches(url)

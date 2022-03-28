@@ -5,11 +5,11 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import StaleElementReferenceException, ElementClickInterceptedException, TimeoutException
 import random
-import string
 
 
 class BaseCase:
     driver = None
+    main_page_url = 'https://target.my.com/dashboard'
 
     @pytest.fixture(scope='function', autouse=True)
     def setup(self, driver):
@@ -43,6 +43,8 @@ class BaseCase:
         elem_password.send_keys(password)
 
         self.click(locators.AUTH_BUTTON_LOCATOR)
+
+        assert self.driver.current_url == self.main_page_url, 'Invalid login or password'
 
     def logout(self):
         self.click(locators.LOGOUT_LOCATOR)
