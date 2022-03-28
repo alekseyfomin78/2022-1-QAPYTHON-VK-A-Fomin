@@ -1,3 +1,5 @@
+import allure
+
 from ui.locators import basic_locators
 from ui.pages.main_page import MainPage
 
@@ -6,6 +8,7 @@ class DashboardPage(MainPage):
     locators = basic_locators.DashboardPageLocators()
     url = 'https://target.my.com/dashboard'
 
+    @allure.step('Create new advertisement campaign')
     def create_ad_campaign(self, image_file_path, url_of_the_advertised_object, campaign_name):
         self.click(self.locators.CREATE_CAMPAIGN_BUTTON_LOCATOR, timeout=30)
 

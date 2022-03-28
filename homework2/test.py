@@ -116,8 +116,8 @@ class Test(BaseCase):
         self.logger.info(f'New segment "{name_segment}" is created')
         self.logger.info(f'Deleting segment "{name_segment}"')
 
-        CHECK_TITLE_NEW_SEGMENT_LOCATOR = (By.XPATH, f'//a[@title="{name_segment}"]')  #
-        elem_title = self.segments_page.find(CHECK_TITLE_NEW_SEGMENT_LOCATOR)  #
+        CHECK_TITLE_NEW_SEGMENT_LOCATOR = (By.XPATH, f'//a[@title="{name_segment}"]')
+        elem_title = self.segments_page.find(CHECK_TITLE_NEW_SEGMENT_LOCATOR)
 
         self.segments_page.delete_segment(name_segment)
 

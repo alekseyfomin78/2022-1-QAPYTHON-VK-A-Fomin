@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 
 from ui.locators import basic_locators
@@ -8,6 +9,7 @@ class SegmentsPage(MainPage):
     locators = basic_locators.SegmentsPageLocators()
     url = 'https://target.my.com/segments/segments_list'
 
+    @allure.step('Create new segment')
     def create_new_segment(self, name_segment):
         self.click(self.locators.CREATE_NEW_SEGMENT_LOCATORS)
         self.click(self.locators.APP_AND_GAME_LOCATOR)
@@ -18,6 +20,7 @@ class SegmentsPage(MainPage):
         elem_name_new_segment.send_keys(name_segment)
         self.click(self.locators.CREATE_NEW_SEGMENT_BUTTON_LOCATORS)
 
+    @allure.step('Delete segment')
     def delete_segment(self, name_segment):
         TITLE_NEW_SEGMENT_LOCATOR = (By.XPATH, f'//a[@title="{name_segment}"]')
         elem_title = self.find(TITLE_NEW_SEGMENT_LOCATOR)

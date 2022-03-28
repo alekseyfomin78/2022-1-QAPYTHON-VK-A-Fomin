@@ -1,3 +1,4 @@
+import allure
 from selenium.common.exceptions import StaleElementReferenceException
 from ui.locators import basic_locators
 from ui.pages.base_page import BasePage
@@ -6,6 +7,7 @@ from ui.pages.base_page import BasePage
 class MainPage(BasePage):
     locators = basic_locators.MainPageLocators()
 
+    @allure.step('Go to Segments page')
     def go_to_segments(self):
         from ui.pages.segments_page import SegmentsPage
         try:

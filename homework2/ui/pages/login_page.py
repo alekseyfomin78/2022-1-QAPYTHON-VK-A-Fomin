@@ -1,3 +1,5 @@
+import allure
+
 from ui.locators import basic_locators
 from ui.pages.base_page import BasePage
 from ui.pages.dashboard_page import DashboardPage
@@ -11,6 +13,7 @@ class LoginPage(BasePage):
     locators = basic_locators.LoginPageLocators()
     url = 'https://target.my.com/'
 
+    @allure.step('Login')
     def login(self, email, password) -> DashboardPage:
         self.click(self.locators.LOGIN_LOCATOR)
 
