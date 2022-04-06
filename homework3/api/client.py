@@ -83,7 +83,7 @@ class ApiClient:
     def post_upload_image(self, file):
         location = "/api/v2/content/static.json"
 
-        files_image = {
+        files = {
             'file': open(file, 'rb')
         }
 
@@ -91,10 +91,10 @@ class ApiClient:
             "X-CSRFToken": self.csrf_token
         }
 
-        return self._request('POST', location=location, headers=headers, files=files_image, jsonify=True)
+        return self._request('POST', location=location, headers=headers, files=files, jsonify=True)
 
-    def get_id_url(self, target_url):
-        location = f"/api/v1/urls/?url={target_url}"
+    def get_id_url(self, url):
+        location = f"/api/v1/urls/?url={url}"
 
         return self._request('GET', location=location, jsonify=True)
 
@@ -134,10 +134,10 @@ class ApiClient:
 
         return self._request('POST', location=location, headers=headers, json=json, jsonify=True)
 
-    def get_check_segment(self, segment_id):
+    def get_check_segment_status_code(self, segment_id, expected_status):
         location = f"/api/v2/remarketing/segments/{segment_id}/relations.json"
 
-        return self._request('GET', location=location)
+        return self._request('GET', location=location, expected_status=expected_status)
 
     def delete_segment(self, segment_id):
         location = f'/api/v2/remarketing/segments/{segment_id}.json'

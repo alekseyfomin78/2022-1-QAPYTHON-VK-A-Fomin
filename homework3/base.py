@@ -22,8 +22,8 @@ class BaseApi:
         response_json = self.api_client.post_upload_image(file=file)
         return response_json['id']
 
-    def get_url_id(self, target_url):
-        response_json = self.api_client.get_id_url(target_url=target_url)
+    def get_url_id(self, url):
+        response_json = self.api_client.get_id_url(url=url)
         return response_json['id']
 
     def create_campaign(self, name, image_id, url_id):
@@ -54,9 +54,9 @@ class BaseApi:
         response_json = self.api_client.post_create_segment(name=name)
         return response_json['id']
 
-    def check_segment(self, segment_id):
-        # проверка того, что при переходе на страницу сегмента в _request получен статус 200
-        assert self.api_client.get_check_segment(segment_id=segment_id)
+    def check_segment_status_code(self, segment_id, expected_status):
+        # проверка того, что при переходе на страницу сегмента в _request() получен переданный статус код
+        self.api_client.get_check_segment_status_code(segment_id=segment_id, expected_status=expected_status)
 
     def delete_segment(self, segment_id):
         self.api_client.delete_segment(segment_id=segment_id)
