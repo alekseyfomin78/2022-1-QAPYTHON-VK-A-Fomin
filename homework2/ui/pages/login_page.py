@@ -35,5 +35,3 @@ class LoginPage(BasePage):
                                        f'ignore_opener%253D1%23email' or
                 self.find(basic_locators.LoginPageLocators.ERROR_LOGIN_MESSAGE)):
             raise ErrorLoginException(f'Invalid login: {email} or password: {password}')
-
-

@@ -31,29 +31,31 @@ class ProfilePageLocators(MainPageLocators):
 
 class DashboardPageLocators(MainPageLocators):
     CREATE_CAMPAIGN_BUTTON_LOCATOR = (By.XPATH, '//div[contains(@class, "button-module-textWrapper")]')
-    LOAD_CONTENT_PAGE_LOCATOR = (By.XPATH, '//div[@class="page__layout__content js-target-content"]')
-    TRAFFIC_LOCATOR = (By.XPATH, '//div[contains(@class, "column-list-item _traffic")]')
+    LOAD_CONTENT_PAGE_LOCATOR = (By.XPATH, '//div[contains(@class, "js-target-content")]')
+    TRAFFIC_LOCATOR = (By.XPATH, '//div[contains(@class, "_traffic")]')
     FIELD_FOR_URL_LOCATOR = (By.XPATH, '//input[contains(@class, "mainUrl-module-searchInput")]')
     LOAD_CONTENT_CAMPAIGN_NAME_LOCATOR = (By.XPATH, '//div[@class="base-settings__campaign-name-wrap '
                                                     'js-base-setting-campaign-name-wrap"]')
-    FIELD_FOR_CAMPAIGN_NAME_LOCATOR = (By.XPATH, '//input[contains(@class, "input__inp js-form-element")]')
+    FIELD_FOR_CAMPAIGN_NAME_LOCATOR = (By.XPATH, '//div[contains(@class, "input_campaign-name")]//child::input')
     TEASER_LOCATOR = (By.XPATH, '//div[contains(@id, "patterns_teaser")]')
-    LOAD_CONTENT_TEASER_LOCATOR = (By.XPATH, '//div[@class="js-settings-after-wrap campaign__after-wrap"]')
+    LOAD_CONTENT_TEASER_LOCATOR = (By.XPATH, '//div[contains(@class, "campaign__after-wrap")]')
     UPLOAD_IMAGE_LOCATOR = (By.XPATH, '//div[contains(@class, "roles-module-buttonWrap")]')
     UPLOAD_IMAGE_BUTTON_LOCATOR = (By.XPATH, '//input[contains(@data-test, "image_90x75")]')
     FIELD_FOR_AD_TITLE_LOCATOR = (By.XPATH, '//input[contains(@data-name, "title")]')
     FIELD_FOR_AD_TEXT_LOCATOR = (By.XPATH, '//textarea[contains(@data-name, "text")]')
     SAVE_CAMPAIGN_BUTTON_LOCATOR = (By.XPATH, '//button[@data-service-readonly="true"]')
     MESSAGE_ABOUT_SUCCESSFUL_CREATION = (By.XPATH, '//div[contains(@class, "notify-module-content")]')
+    CHECK_TITLE_CAMPAIGN_LOCATOR = '//a[@title="{}"]'
 
 
 class SegmentsPageLocators(MainPageLocators):
-    CREATE_NEW_SEGMENT_LOCATORS = (By.XPATH, '//div[@class="segments-list__btn-wrap js-create-button-wrap"]')
+    CREATE_NEW_SEGMENT_LOCATORS = (By.XPATH, '//div[contains(@class, "js-create-button-wrap")]')
     CHECKBOX_LOCATOR = (By.XPATH, '//input[@type="checkbox"]')
-    ADD_SEGMENT_BUTTON_LOCATOR = (By.XPATH, '//div[@class="adding-segments-modal__btn-wrap js-add-button"]//child::button')
-    FIELD_FOR_NAME_NEW_SEGMENT_LOCATORS = (By.XPATH, '//div[@class="input input_create-segment-form"]//child::input')
-    CREATE_NEW_SEGMENT_BUTTON_LOCATORS = (By.XPATH, '//button[@class="button button_submit"]')
+    ADD_SEGMENT_BUTTON_LOCATOR = (By.XPATH, '//div[contains(@class, "js-add-button")]//child::button')
+    FIELD_FOR_NAME_NEW_SEGMENT_LOCATORS = (By.XPATH, '//div[contains(@class, '
+                                                     '"input_create-segment-form")]//child::input')
+    CREATE_NEW_SEGMENT_BUTTON_LOCATORS = (By.XPATH, '//button[contains(@class, "button_submit")]')
     APP_AND_GAME_LOCATOR = (By.XPATH, '//div[@class="adding-segments-item"]')
-    DELETE_SEGMENT_BUTTON_LOCATOR = (By.XPATH, '//button[@class="button button_confirm-remove button_general"]')
-
-
+    DELETE_SEGMENT_BUTTON_LOCATOR = (By.XPATH, '//button[contains(@class, "button_confirm-remove")]')
+    TITLE_NEW_SEGMENT_LOCATOR = '//a[@title="{}"]'
+    DELETE_SEGMENT_CROSS_LOCATOR = '//div[contains(@data-test, "remove-{}")]//child::span'

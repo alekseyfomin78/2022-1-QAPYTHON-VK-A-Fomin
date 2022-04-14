@@ -67,8 +67,8 @@ class Test(BaseCase):
 
         self.logger.info(f'New advertisement campaign "{campaign_name}" is created')
 
-        CHECK_TITLE_CAMPAIGN_LOCATOR = (By.XPATH, f'//a[@title="{campaign_name}"]')
-        elem_title = self.dashboard_page.find(CHECK_TITLE_CAMPAIGN_LOCATOR, timeout=30)
+        elem_title = self.dashboard_page.find(
+            (By.XPATH, self.dashboard_page.locators.CHECK_TITLE_CAMPAIGN_LOCATOR.format(campaign_name)))
 
         self.logger.info(f'Checking that the advertisement campaign "{campaign_name}" has been created')
 
@@ -90,13 +90,9 @@ class Test(BaseCase):
         self.segments_page.create_new_segment(name_segment)
 
         self.logger.info(f'New segment "{name_segment}" is created')
+        self.logger.info(f'Deleting segment "{name_segment}"')
 
-        CHECK_TITLE_NEW_SEGMENT_LOCATOR = (By.XPATH, f'//a[@title="{name_segment}"]')
-        elem_title = self.segments_page.find(CHECK_TITLE_NEW_SEGMENT_LOCATOR)
-
-        self.logger.info(f'Checking that the segment "{name_segment}" has been created')
-
-        assert elem_title.get_attribute('text') == name_segment
+        self.segments_page.delete_segment(name_segment)
 
     @pytest.mark.UI
     def test_delete_segment(self):
@@ -116,8 +112,8 @@ class Test(BaseCase):
         self.logger.info(f'New segment "{name_segment}" is created')
         self.logger.info(f'Deleting segment "{name_segment}"')
 
-        CHECK_TITLE_NEW_SEGMENT_LOCATOR = (By.XPATH, f'//a[@title="{name_segment}"]')
-        elem_title = self.segments_page.find(CHECK_TITLE_NEW_SEGMENT_LOCATOR)
+        elem_title = self.segments_page.find(
+            (By.XPATH, self.segments_page.locators.TITLE_NEW_SEGMENT_LOCATOR.format(name_segment)))
 
         self.segments_page.delete_segment(name_segment)
 

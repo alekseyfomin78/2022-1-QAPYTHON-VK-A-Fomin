@@ -30,7 +30,7 @@ class BasePage(object):
 
     def wait(self, timeout=None):
         if timeout is None:
-            timeout = 15
+            timeout = 30
         return WebDriverWait(self.driver, timeout=timeout)
 
     @allure.step('Find element')

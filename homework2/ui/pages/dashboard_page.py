@@ -50,4 +50,3 @@ class DashboardPage(MainPage):
         elem_ad_text.send_keys(campaign_name)
 
         self.click(self.locators.SAVE_CAMPAIGN_BUTTON_LOCATOR, timeout=30)
-

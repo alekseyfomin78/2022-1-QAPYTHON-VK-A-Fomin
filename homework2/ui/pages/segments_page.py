@@ -19,16 +19,15 @@ class SegmentsPage(MainPage):
         elem_name_new_segment.clear()
         elem_name_new_segment.send_keys(name_segment)
         self.click(self.locators.CREATE_NEW_SEGMENT_BUTTON_LOCATORS)
+        elem_title = self.find(
+            (By.XPATH, self.locators.TITLE_NEW_SEGMENT_LOCATOR.format(name_segment)))
+        assert elem_title.get_attribute('text') == name_segment
 
     @allure.step('Delete segment')
     def delete_segment(self, name_segment):
-        TITLE_NEW_SEGMENT_LOCATOR = (By.XPATH, f'//a[@title="{name_segment}"]')
-        elem_title = self.find(TITLE_NEW_SEGMENT_LOCATOR)
+        elem_title = self.find((By.XPATH, self.locators.TITLE_NEW_SEGMENT_LOCATOR.format(name_segment)))
         id_segment = elem_title.get_attribute('href').split('/')[-1]
 
-        DELETE_SEGMENT_CROSS_LOCATOR = (By.XPATH, f'//div[contains(@data-test, "remove-{id_segment}")]//child::span')
-        self.click(DELETE_SEGMENT_CROSS_LOCATOR)
+        self.click((By.XPATH, self.locators.DELETE_SEGMENT_CROSS_LOCATOR.format(id_segment)))
 
         self.click(self.locators.DELETE_SEGMENT_BUTTON_LOCATOR)
-
-
