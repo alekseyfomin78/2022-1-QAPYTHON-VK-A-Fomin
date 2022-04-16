@@ -31,3 +31,4 @@ class SegmentsPage(MainPage):
         self.click((By.XPATH, self.locators.DELETE_SEGMENT_CROSS_LOCATOR.format(id_segment)))
 
         self.click(self.locators.DELETE_SEGMENT_BUTTON_LOCATOR)
+        assert self.element_not_present(elem_title)

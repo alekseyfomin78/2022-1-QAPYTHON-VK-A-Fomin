@@ -23,7 +23,7 @@ class TestLogin(BaseCase):
     authorize = False
 
     @pytest.mark.UI
-    def test_negative_login_one(self, credentials):
+    def test_negative_login_email_sent_to_password_field(self, credentials):
         self.logger.info(f'Opening login page "{self.login_page.url}"')
 
         self.logger.info('Login')
@@ -34,7 +34,7 @@ class TestLogin(BaseCase):
             self.login_page.login(email=credentials[0], password=credentials[0])
 
     @pytest.mark.UI
-    def test_negative_login_two(self, credentials):
+    def test_negative_login_password_sent_to_email_field(self, credentials):
         self.logger.info(f'Opening login page "{self.login_page.url}"')
 
         self.logger.info('Login')
@@ -112,12 +112,4 @@ class Test(BaseCase):
         self.logger.info(f'New segment "{name_segment}" is created')
         self.logger.info(f'Deleting segment "{name_segment}"')
 
-        elem_title = self.segments_page.find(
-            (By.XPATH, self.segments_page.locators.TITLE_NEW_SEGMENT_LOCATOR.format(name_segment)))
-
         self.segments_page.delete_segment(name_segment)
-
-        self.logger.info(f'Segment "{name_segment}" is deleted')
-        self.logger.info(f'Checking that the segment "{name_segment}" has been deleted')
-
-        assert self.segments_page.element_not_present(elem_title)
