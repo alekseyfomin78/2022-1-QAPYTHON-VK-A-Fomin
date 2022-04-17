@@ -1,7 +1,7 @@
-import string
-
-import random
 import pytest
+import faker
+
+fake = faker.Faker()
 
 
 class BaseApi:
@@ -15,8 +15,7 @@ class BaseApi:
             self.api_client.post_login()
 
     def random_info(self, max_length):
-        return ''.join(random.choice(string.ascii_letters + string.digits + ' ') for _ in range(
-            random.randint(1, max_length)))
+        return fake.lexify(text='?' * max_length)
 
     def upload_image(self, file):
         response_json = self.api_client.post_upload_image(file=file)
@@ -30,13 +29,13 @@ class BaseApi:
         response_json = self.api_client.post_create_campaign(name=name, image_id=image_id, url_id=url_id)
         return response_json['id']
 
-    def check_campaign_status(self, campaign_id, status):
+    def get_campaign_status(self, campaign_id):
         response_json = self.api_client.get_campaign_status(campaign_id=campaign_id)
-        assert response_json['issues'][0]['code'] == status
+        return response_json['issues'][0]['code']
 
     def delete_campaign(self, campaign_id):
         self.api_client.delete_campaign(campaign_id=campaign_id)
-        self.check_campaign_status(campaign_id=campaign_id, status='ARCHIVED')
+        assert self.get_campaign_status(campaign_id=campaign_id) == 'ARCHIVED'
 
     @pytest.fixture()
     def campaign(self, file_path):
@@ -53,11 +52,3 @@ class BaseApi:
     def create_segment(self, name):
         response_json = self.api_client.post_create_segment(name=name)
         return response_json['id']
-
-    def check_segment_status_code(self, segment_id, expected_status):
-        # проверка того, что при переходе на страницу сегмента в _request() получен переданный статус код
-        self.api_client.get_check_segment_status_code(segment_id=segment_id, expected_status=expected_status)
-
-    def delete_segment(self, segment_id):
-        self.api_client.delete_segment(segment_id=segment_id)
-

@@ -2,9 +2,7 @@ from urllib.parse import urljoin
 
 import requests
 
-
-class ResponseStatusCodeException(Exception):
-    pass
+from api.custom_exceptions import ResponseStatusCodeException
 
 
 class ApiClient:
@@ -29,8 +27,7 @@ class ApiClient:
             raise ResponseStatusCodeException(f'Got {response.status_code} {response.reason} for URL "{url}"')
 
         if jsonify:
-            json_response = response.json()
-            return json_response
+            return response.json()
 
         return response
 
@@ -58,8 +55,9 @@ class ApiClient:
             "nosavelogin": "0",
         }
 
-        self.session.post(url=url, headers=headers, data=data)
+        response = self.session.post(url=url, headers=headers, data=data)
         self.csrf_token = self.get_csrf_token()
+        return response
 
     def post_create_campaign(self, name, image_id, url_id):
         location = "/api/v2/campaigns.json"
@@ -147,4 +145,3 @@ class ApiClient:
         }
 
         return self._request('DELETE', location=location, headers=headers, expected_status=204)
-
