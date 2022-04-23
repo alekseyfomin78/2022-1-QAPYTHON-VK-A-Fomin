@@ -1,12 +1,18 @@
 import allure
 
 from ui.locators import basic_locators
-from ui.pages.main_page import MainPage
+from ui.pages.base_page import BasePage
+from ui.pages.segments_page import SegmentsPage
 
 
-class DashboardPage(MainPage):
+class DashboardPage(BasePage):
     locators = basic_locators.DashboardPageLocators()
     url = 'https://target.my.com/dashboard'
+
+    @allure.step('Go to Segments page')
+    def go_to_segments(self):
+        self.driver.get('https://target.my.com/segments/segments_list')
+        return SegmentsPage(self.driver)
 
     @allure.step('Create new advertisement campaign')
     def create_ad_campaign(self, image_file_path, url_of_the_advertised_object, campaign_name):

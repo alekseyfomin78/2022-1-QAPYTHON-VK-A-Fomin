@@ -10,7 +10,6 @@ from webdriver_manager.firefox import GeckoDriverManager
 from ui.pages.base_page import BasePage
 from ui.pages.login_page import LoginPage
 from ui.pages.dashboard_page import DashboardPage
-from ui.pages.main_page import MainPage
 from ui.pages.segments_page import SegmentsPage
 
 
@@ -82,11 +81,6 @@ def credentials():
 @pytest.fixture
 def base_page(driver):
     return BasePage(driver=driver)
-
-
-@pytest.fixture
-def main_page(driver):
-    return MainPage(driver=driver)
 
 
 @pytest.fixture

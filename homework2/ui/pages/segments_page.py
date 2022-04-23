@@ -2,10 +2,10 @@ import allure
 from selenium.webdriver.common.by import By
 
 from ui.locators import basic_locators
-from ui.pages.main_page import MainPage
+from ui.pages.base_page import BasePage
 
 
-class SegmentsPage(MainPage):
+class SegmentsPage(BasePage):
     locators = basic_locators.SegmentsPageLocators()
     url = 'https://target.my.com/segments/segments_list'
 

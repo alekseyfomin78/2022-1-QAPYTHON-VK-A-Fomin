@@ -8,16 +8,6 @@ from selenium.webdriver.common.by import By
 
 from ui.pages.login_page import ErrorLoginException
 
-'''
-Структура страниц:
-
-             --> login_page
-             |
-base_page -->
-             |
-             --> main_page --> [dashboard_page, segments_page, ]
-'''
-
 
 class TestLogin(BaseCase):
     authorize = False
