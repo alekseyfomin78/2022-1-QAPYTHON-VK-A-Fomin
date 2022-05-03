@@ -1,0 +1,3 @@
+#!/bin/bash
+echo 'Топ 5 самых больших по размеру запросов, которые завершились клиентской (4XX) ошибкой' > results/result_4.txt | cat access.log | awk '$9 ~ /^4[0-9][0-9]/ {print $0}' | sort -rn -k10 | head -n5 | awk '{print $7,$9,$10,$1}' >> results/result_4.txt
+

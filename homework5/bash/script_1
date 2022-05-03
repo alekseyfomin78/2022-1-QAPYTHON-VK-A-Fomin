@@ -1,0 +1,2 @@
+#!/bin/bash
+echo 'Общее количество запросов' > results/result_1.txt | cat access.log | wc -l >> results/result_1.txt
