@@ -1,0 +1,3 @@
+#!/bin/bash
+echo 'Топ 10 самых частых запросов' > results/result_3.txt | cat access.log | awk '{print $7}' | sort | uniq -c | sort -nr | head -n10 | awk '{print $2, $1}' >> results/result_3.txt
+
