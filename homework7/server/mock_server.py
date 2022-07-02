@@ -12,14 +12,6 @@ app = Flask(__name__)
 SURNAME_DATA = {}
 
 
-@app.route('/get_surname/<name>', methods=['GET'])
-def get_user_surname(name):
-    if surname := SURNAME_DATA.get(name):
-        return jsonify(surname), 200
-    else:
-        return jsonify(f'Surname for user {name} not found'), 404
-
-
 @app.route('/add_surname', methods=['POST'])
 def post_user_surname():
     user_name = json.loads(request.data)['name']
@@ -30,6 +22,35 @@ def post_user_surname():
         return jsonify(data), 201
     else:
         return jsonify(f'User surname {user_name} already exists'), 400
+
+
+@app.route('/get_surname/<name>', methods=['GET'])
+def get_user_surname(name):
+    if surname := SURNAME_DATA.get(name):
+        return jsonify(surname), 200
+    else:
+        return jsonify(f'Surname for user {name} not found'), 404
+
+
+@app.route('/update_surname/<user_name>', methods=['PUT'])
+def update_user_surname(user_name):
+    user_surname = json.loads(request.data)['surname']
+    if user_name in SURNAME_DATA:
+        SURNAME_DATA[user_name] = user_surname
+        data = {user_name: user_surname}
+        return jsonify(data), 201
+    else:
+        return jsonify(f'User {user_name} and his surname {user_surname} are not exists'), 400
+
+
+@app.route('/delete_surname/<user_name>', methods=['DELETE'])
+def delete_user_surname(user_name):
+    if user_name in SURNAME_DATA:
+        surname = SURNAME_DATA.pop(user_name)
+        data = {user_name: surname}
+        return jsonify(data), 204
+    else:
+        return jsonify(f'User {user_name} is not exist'), 400
 
 
 def run_mock():
