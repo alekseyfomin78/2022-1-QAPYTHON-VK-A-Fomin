@@ -1,6 +1,6 @@
 # 2022-1-QAPYTHON-VK-A-Fomin
 
-###QA Automation Testing
+### QA Automation Testing
 
 - Pytest
 - Selenium WebDriver
