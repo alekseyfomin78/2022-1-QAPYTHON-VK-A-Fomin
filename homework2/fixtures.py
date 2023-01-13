@@ -18,7 +18,7 @@ def pytest_configure(config):
         base_dir = 'C:\\tests'
     else:
         base_dir = '/tmp/tests'
-    if not hasattr(config, 'workerunput'):
+    if not hasattr(config, 'workerinput'):
         if os.path.exists(base_dir):
             shutil.rmtree(base_dir)
         os.makedirs(base_dir)
