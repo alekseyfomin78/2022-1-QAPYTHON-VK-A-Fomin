@@ -1,3 +1,4 @@
+import os
 import sqlalchemy
 from sqlalchemy import inspect
 from sqlalchemy.orm import sessionmaker
@@ -6,12 +7,12 @@ from mysql.models import Base
 
 class MySQLClient:
 
-    def __init__(self, user, password, db_name, host, port):
-        self.user = user
-        self.password = password
+    def __init__(self, user: str, password: str, db_name: str, host: str, port: int):
+        self.user = user  # для docker-compose: os.environ['MYSQL_USER']
+        self.password = password  # os.environ['MYSQL_PASSWORD']
         self.db_name = db_name
-        self.host = host
-        self.port = port
+        self.host = host  # os.environ['MYSQL_HOST']
+        self.port = port  # os.environ['MYSQL_PORT']
 
         self.engine = None
         self.connection = None

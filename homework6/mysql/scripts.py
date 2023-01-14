@@ -22,7 +22,7 @@ def count_requests_by_type():
     return Counter(req_type_column).most_common()
 
 
-def most_frequent_requests(top):
+def most_frequent_requests(top: int):
     with open(LOG, 'r') as log:
         url_column = []
         for req in log.readlines():
@@ -31,7 +31,7 @@ def most_frequent_requests(top):
     return Counter(url_column).most_common(top)
 
 
-def largest_requests_with_4xx(top):
+def largest_requests_with_4xx(top: int):
     with open(LOG, 'r') as log:
         url_code_size_ip_columns = []
         for req in log.readlines():
@@ -42,7 +42,7 @@ def largest_requests_with_4xx(top):
     return url_code_size_ip_columns[:top]
 
 
-def users_with_5xx_requests(top):
+def users_with_5xx_requests(top: int):
     ip_with_5xx = []
     with open(LOG, 'r') as log:
         for req in log.readlines():

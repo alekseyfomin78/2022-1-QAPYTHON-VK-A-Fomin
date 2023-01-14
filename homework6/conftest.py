@@ -4,6 +4,8 @@ from mysql.client import MySQLClient
 
 def pytest_configure(config):
     mysql_client = MySQLClient(user='root', password='pass', db_name='TEST_SQL', host='127.0.0.1', port=3306)
+    # для docker-compose
+    # mysql_client = MySQLClient(db_name='TEST_SQL')
     if not hasattr(config, 'workerinput'):
         mysql_client.create_db()
 

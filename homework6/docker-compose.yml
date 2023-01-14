@@ -1,0 +1,27 @@
+version: '2.1'
+
+services:
+  mysql:
+    environment:
+      MYSQL_ROOT_PASSWORD: pass
+    image: "mysql:latest"
+    healthcheck:
+      test: [ "CMD", "mysql" ,"-uroot", "-ppass", "ping", "-h", "127.0.0.1" ]
+      timeout: 1s
+      retries: 30
+
+  tests:
+    image: "tests_hw6:latest"
+    tty: true
+    volumes:
+      - "./:/"
+      - "./alluredir:/tmp/alluredir"
+    entrypoint: bash /start_tests.sh
+    environment:
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=pass
+      - MYSQL_HOST=mysql
+      - MYSQL_PORT=3306
+    depends_on:
+      percona:
+        condition: service_healthy
