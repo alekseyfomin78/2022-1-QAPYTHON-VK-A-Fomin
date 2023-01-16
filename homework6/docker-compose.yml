@@ -2,26 +2,34 @@ version: '2.1'
 
 services:
   mysql:
+    networks:
+      network_hw6: null
     environment:
       MYSQL_ROOT_PASSWORD: pass
     image: "mysql:latest"
     healthcheck:
-      test: [ "CMD", "mysql" ,"-uroot", "-ppass", "ping", "-h", "127.0.0.1" ]
+      test: [ "CMD", "mysqladmin" ,"-uroot", "-ppass", "ping", "-h", "127.0.0.1" ]
       timeout: 1s
       retries: 30
 
   tests:
+    networks:
+      network_hw6: null
     image: "tests_hw6:latest"
     tty: true
     volumes:
-      - "./:/"
+      - "./:/tests_hw6"
       - "./alluredir:/tmp/alluredir"
-    entrypoint: bash /start_tests.sh
+    entrypoint: bash /tests_hw6/start_tests.sh
     environment:
       - MYSQL_USER=root
       - MYSQL_PASSWORD=pass
       - MYSQL_HOST=mysql
       - MYSQL_PORT=3306
     depends_on:
-      percona:
+      mysql:
         condition: service_healthy
+
+networks:
+  network_hw6:
+    name: network_hw6
