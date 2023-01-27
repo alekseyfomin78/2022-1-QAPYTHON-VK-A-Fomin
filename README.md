@@ -9,6 +9,6 @@
 - Selenoid
 - API
 - MySQL ORM
-- Mocks & Stubs
+- Mocks & Stubs servers
 - Docker
-- Jenkins
+
