@@ -14,7 +14,7 @@ class User:
 class Builder:
 
     @staticmethod
-    def create_user(name: int = None, surname: int = None) -> User:
+    def create_user(name: str = None, surname: str = None) -> User:
         fake_user = fake.name().split()
         if name is None:
             name = fake_user[0]
